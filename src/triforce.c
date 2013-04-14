@@ -4,7 +4,7 @@
 
 
 #define MY_UUID {0xDF, 0x3C, 0xF9, 0x8C, 0x36, 0xBC, 0x4E, 0x9A, 0xA0, 0x5E, 0xAC, 0x9D, 0x7D, 0xC5, 0x97, 0x7E}
-PBL_APP_INFO(MY_UUID, "Triforce Clock", "saulricardo", 2,0 /* App version */,DEFAULT_MENU_ICON,APP_INFO_WATCH_FACE);
+PBL_APP_INFO(MY_UUID, "Triforce Clock", "saulricardo", 2,1 /* App version */,DEFAULT_MENU_ICON,APP_INFO_WATCH_FACE);
 
 
 Window window;
@@ -13,7 +13,10 @@ TextLayer timeLayer; //Clock
 TextLayer text_date_layer; //Date
 TextLayer AMPM; //AM/PM
 
-RotBmpPairContainer bitmap_container; //Image
+RotBmpPairContainer triforce; //Image
+
+RotBmpPairContainer dots;
+int32_t current_layer_angle = 0;
 
 void update_time_display() {
   static char timeText[] = "00:00";
@@ -24,15 +27,8 @@ void update_time_display() {
   PblTm currentTime;
 
   GContext* ctx = app_get_current_graphics_context();
-#ifdef INVERT_COLORS
-  graphics_context_set_compositing_mode(ctx, GCompOpAssignInverted);
-#endif
 
-  if (clock_is_24h_style()) {
-    timeFormat = "%R";
-  } else {
     timeFormat = "%I:%M";
-  }
   //get pebble Time
   get_time(&currentTime);
 
@@ -51,8 +47,14 @@ void update_time_display() {
 	} else {
 	text_layer_set_text(&AMPM, "AM");
 	}
-
   text_layer_set_text(&timeLayer, timeText);
+  
+    // This implementation assumes only one type of timer used in the app.
+
+  current_layer_angle = (current_layer_angle + 10) % 360;
+
+  // This will automatically mark the layer dirty and update it.
+  rotbmp_pair_layer_set_angle(&dots.layer, TRIG_MAX_ANGLE * current_layer_angle / 360);
 }
 
 void handle_init(AppContextRef ctx) {
@@ -65,11 +67,17 @@ void handle_init(AppContextRef ctx) {
   // Display the black and white image with transparency.
   resource_init_current_app(&APP_RESOURCES);
 
-  rotbmp_pair_init_container(RESOURCE_ID_IMAGE_TRIFORCE_WHITE, RESOURCE_ID_IMAGE_TRIFORCE_BLACK, &bitmap_container);
-  bitmap_container.layer.layer.frame.origin.x = 5;
-  bitmap_container.layer.layer.frame.origin.y = -10;
+  rotbmp_pair_init_container(RESOURCE_ID_IMAGE_TRIFORCE_WHITE, RESOURCE_ID_IMAGE_TRIFORCE_BLACK, &triforce);
+  triforce.layer.layer.frame.origin.x = 5;
+  triforce.layer.layer.frame.origin.y = -10;
   
-  layer_add_child(&window.layer, &bitmap_container.layer.layer);
+  layer_add_child(&window.layer, &triforce.layer.layer);
+  
+  rotbmp_pair_init_container(RESOURCE_ID_IMAGE_DOTS_WHITE, RESOURCE_ID_IMAGE_DOTS_BLACK, &dots);
+  dots.layer.layer.frame.origin.x = 5;
+  dots.layer.layer.frame.origin.y = -10;
+  
+  layer_add_child(&window.layer, &dots.layer.layer);
   	
   //Initializes the timeLayer  
   text_layer_init(&timeLayer, GRect(0, 168-42, 144 /* width */, 42 /* height */));
@@ -78,8 +86,6 @@ void handle_init(AppContextRef ctx) {
   layer_set_frame(&timeLayer.layer, GRect(0, 100, 144, 168-100));
   text_layer_set_background_color(&timeLayer, GColorClear);
   text_layer_set_font(&timeLayer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_TRIFORCE_30)));
-
-  update_time_display();
 
   layer_add_child(&window.layer, &timeLayer.layer);
   
@@ -98,11 +104,14 @@ void handle_init(AppContextRef ctx) {
   layer_set_frame(&AMPM.layer, GRect(110, 107, 144-110, 168-107));
   layer_add_child(&window.layer, &AMPM.layer);
 
+  update_time_display();
+
 }
 void handle_deinit(AppContextRef ctx) {
   (void)ctx;
 
-  rotbmp_pair_deinit_container(&bitmap_container);
+  rotbmp_pair_deinit_container(&triforce);
+  rotbmp_pair_deinit_container(&dots);
 }
 
 // Called once per second

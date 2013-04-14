@@ -7,6 +7,11 @@
         "defName": "IMAGE_TRIFORCE",
         "file": "images/triforcewhite.png"},
 	
+	{"type":"png-trans",
+	"defName":"IMAGE_DOTS",
+	"file":"images/dots.png"
+   	 },
+	
 	{"type":"font",
 	"defName":"FONT_TRIFORCE_20",
 	"file":"fonts/triforce.ttf"
