@@ -95,7 +95,7 @@ void handle_init(AppContextRef ctx) {
   text_layer_init(&AMPM, window.layer.frame);
   text_layer_set_text_color(&AMPM, GColorWhite);
   text_layer_set_background_color(&AMPM, GColorClear);
-  layer_set_frame(&AMPM.layer, GRect(105, 107, 144-105, 168-107));
+  layer_set_frame(&AMPM.layer, GRect(110, 107, 144-110, 168-107));
   layer_add_child(&window.layer, &AMPM.layer);
 
 }
