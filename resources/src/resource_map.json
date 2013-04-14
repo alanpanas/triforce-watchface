@@ -1,0 +1,20 @@
+{
+    "friendlyVersion": "dev_0.0",
+    "versionDefName": "APP_RESOURCES",
+
+    "media": [
+	{"type": "png-trans",
+        "defName": "IMAGE_TRIFORCE",
+        "file": "images/triforcewhite.png"},
+	
+	{"type":"font",
+	"defName":"FONT_TRIFORCE_20",
+	"file":"fonts/triforce.ttf"
+   	 },
+	
+	{"type":"font",
+	"defName":"FONT_TRIFORCE_30",
+	"file":"fonts/triforce.ttf"
+   	 }
+	    ]
+}

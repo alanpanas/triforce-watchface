@@ -1,0 +1,8 @@
+argv = ['./waf', 'configure']
+environ = {'TERM_SESSION_ID': 'A7762769-1C7C-4C67-AB2D-7A95E191662F', 'SSH_AUTH_SOCK': '/tmp/launch-x4vsrV/Listeners', 'VERSIONER_PYTHON_PREFER_32_BIT': 'no', 'LC_CTYPE': 'UTF-8', 'TERM_PROGRAM_VERSION': '309', 'SHELL': '/bin/bash', 'LOGNAME': 'saulricardogomez', 'USER': 'saulricardogomez', 'HOME': '/Users/saulricardogomez', 'PATH': '/Users/saulricardogomez/pebble-dev/arm-cs-tools/bin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin', 'TMPDIR': '/var/folders/vs/2k82r2sd60b9jw7q4x64svrr0000gn/T/', 'TERM_PROGRAM': 'Apple_Terminal', 'TERM': 'xterm-color', 'Apple_PubSub_Socket_Render': '/tmp/launch-5kLr9N/Render', 'VERSIONER_PYTHON_VERSION': '2.7', 'SHLVL': '1', 'OLDPWD': '/Users/saulricardogomez/pebble-dev/pebble-sdk-release-001', 'CLICOLOR': '1', '__CF_USER_TEXT_ENCODING': '0x1F5:0:0', 'Apple_Ubiquity_Message': '/tmp/launch-XYEklL/Apple_Ubiquity_Message', 'PWD': '/Users/saulricardogomez/pebble-dev/pebble-sdk-release-001/imagen', '_': './waf', 'COMMAND_MODE': 'unix2003', 'LSCOLORS': 'ExFxCxDxBxegedabagacad'}
+files = ['/Users/saulricardogomez/pebble-dev/pebble-sdk-release-001/imagen/wscript']
+hash = -6438031668512116530
+options = {'files': '', 'jobs': 2, 'verbose': 0, 'nocache': False, 'progress_bar': 0, 'timestamp': None, 'distcheck_args': None, 'top': '', 'destdir': '', 'keep': 0, 'zones': '', 'debug': False, 'prefix': '/usr/local/', 'download': False, 'force': False, 'targets': '', 'out': ''}
+out_dir = '/Users/saulricardogomez/pebble-dev/pebble-sdk-release-001/imagen/build'
+run_dir = '/Users/saulricardogomez/pebble-dev/pebble-sdk-release-001/imagen'
+top_dir = '/Users/saulricardogomez/pebble-dev/pebble-sdk-release-001/imagen'
